@@ -13,6 +13,7 @@ hs_err_pid*
 /DBMS/nbproject/private/
 nbproject/private/
 build/
+nbproject/
 nbbuild/
 dist/
 nbdist/
