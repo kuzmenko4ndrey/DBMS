@@ -15,4 +15,8 @@ public class DB {
     
     private final ArrayList<Table> tables = new ArrayList<>();
     
+    public void addTable(Table t) {
+        
+    }
+    
 }
