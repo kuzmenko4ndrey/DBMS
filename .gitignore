@@ -23,3 +23,5 @@ nbdist/
 /DBMS/dist/
 /DBMS/nbdist/
 /DBMS/.nb-gradle/
+build.xml
+manifest.mf
