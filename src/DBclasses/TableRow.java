@@ -5,10 +5,108 @@
  */
 package DBclasses;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Neophron
  */
 public class TableRow {
+
+    protected static class Cell<T> {
+
+        private T data;
+
+        protected Cell() {
+            data = null;
+        }
+
+        protected void set(T newdata) {
+            data = newdata;
+        }
+
+        protected T get() {
+            return data;
+        }
+
+        protected Cell<T> getClone() {
+            Cell<T> c = new Cell<>();
+            return c;
+        }
+    }
+
+    private final ArrayList<Cell> cells;
+    private final TableScheme scheme;
+
+    protected static TableRow createRow(String tableScheme, List<Object> data) {
+        //ArrayList<Cell> c = new ArrayList<>();
+        /*
+        some parse shit
+        c.add(new Cell<Type>);
+         */
+//        TableRow r = new TableRow(c);
+//        if (r.setData(data)) {
+//            return r;
+//        } else {
+//            return null;
+//        }
+        return null;
+    }
+
+    protected TableRow getClone() {
+        ArrayList<Cell> c = new ArrayList<>();
+        for (int i = 0; i < cells.size(); i++) {
+            c.add(cells.get(i).getClone());
+        }
+        return new TableRow(c, scheme);
+    }
+
+    protected TableRow(ArrayList<Cell> c, TableScheme scheme) {
+        cells = c;
+        this.scheme = scheme;
+    }
+
+    protected boolean setData(List<Object> data) {
+        for (int i = 0; i < cells.size(); i++) {
+            if (!scheme.classCastChecker(data.get(i), i)) {
+                return false;
+            }
+            cells.get(i).set(data.get(i));
+        }
+        return true;
+    }
     
+    protected ArrayList<Object> getData() {
+        ArrayList<Object> alo = new ArrayList<>();
+        for (Cell c : cells) {
+            alo.add(c.data);
+        }
+        return alo;
+    }
+    
+    @Override
+    public String toString() {
+        String res = "";
+        for (Cell c : cells) {
+            res += c.data.toString() + " ";
+        }
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object tr) {
+        try {
+            TableRow r = (TableRow) tr;
+            for (int i = 0; i < cells.size(); i++) {
+                if (!cells.get(i).data.equals(r.cells.get(i).data)) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (ClassCastException ex) {
+            return false;
+        }
+    }
+
 }
