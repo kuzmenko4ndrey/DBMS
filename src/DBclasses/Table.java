@@ -36,6 +36,10 @@ public class Table {
         return name;
     }
     
+    public int getPictureIndex() {
+        return scheme.getPicIndex();
+    }
+    
     protected boolean addRow(List<Object> data) {
         TableRow r = scheme.createRow();
         if (r.setData(data)) {
@@ -79,7 +83,7 @@ public class Table {
         return res;
     }
     
-    protected ArrayList<ArrayList<Object>> getData() {
+    public ArrayList<ArrayList<Object>> getData() {
         ArrayList<ArrayList<Object>> res = new ArrayList<>();
         for (TableRow tr : rows) {
             res.add(tr.getData());
@@ -104,6 +108,14 @@ public class Table {
             }
         }
         return t.toStringArray();
+    }
+    
+    public ArrayList<String> getStrScheme() {
+        return scheme.toStringArray();
+    }
+    
+    public ArrayList<String> getColNames() {
+        return scheme.getColNames();
     }
     
 } 

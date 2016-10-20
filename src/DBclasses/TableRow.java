@@ -30,10 +30,6 @@ public class TableRow {
             return data;
         }
 
-        protected Cell<T> getClone() {
-            Cell<T> c = new Cell<>();
-            return c;
-        }
     }
 
     private final ArrayList<Cell> cells;
@@ -57,7 +53,7 @@ public class TableRow {
     protected TableRow getClone() {
         ArrayList<Cell> c = new ArrayList<>();
         for (int i = 0; i < cells.size(); i++) {
-            c.add(cells.get(i).getClone());
+            c.add(new Cell());
         }
         return new TableRow(c, scheme);
     }
@@ -69,10 +65,10 @@ public class TableRow {
 
     protected boolean setData(List<Object> data) {
         for (int i = 0; i < cells.size(); i++) {
-            if (!scheme.classCastChecker(data.get(i), i)) {
+            if (scheme.classCastChecker(data.get(i), i) == null) {
                 return false;
             }
-            cells.get(i).set(data.get(i));
+            cells.get(i).set(scheme.classCastChecker(data.get(i), i));
         }
         return true;
     }
@@ -89,7 +85,7 @@ public class TableRow {
     public String toString() {
         String res = "";
         for (Cell c : cells) {
-            res += c.data.toString() + " ";
+            res += c.data.toString() + ";";
         }
         return res;
     }

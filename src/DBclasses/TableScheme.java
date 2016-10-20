@@ -15,83 +15,97 @@ import java.util.List;
  */
 public class TableScheme {
 
-    private static class SchemeElement<T> {
+    private static class SchemeElement {
 
         String name;
         String type;
-        T dummy = null;
 
         private SchemeElement(String name, String type) {
             this.name = name;
             this.type = type;
         }
 
-        protected Cell<T> getCell() {
-            return new Cell();
-        }
-
-        private SchemeElement<T> getClone() {
-            return new SchemeElement<>(name, type);
+        private SchemeElement getClone() {
+            return new SchemeElement(name, type);
         }
     }
 
-    protected boolean classCastChecker(Object o, int n) {
+    protected Object classCastChecker(Object o, int n) {
+        Object t = null;
         try {
             if (header.get(n).type.equals("Double")) {
-                Double t = (Double) o;
+                t = Double.parseDouble(o.toString());
             }
             if (header.get(n).type.equals("Integer")) {
-                Integer t = (Integer) o;
+                t = Integer.parseInt(o.toString());
             }
             if (header.get(n).type.equals("Character")) {
-                Character t = (Character) o;
+                t = o.toString().charAt(0);
             }
             if (header.get(n).type.equals("String")) {
-                String t = (String) o;
+                t = (String) o;
             }
             if (header.get(n).type.equals("Picture")) {
-                Picture t = (Picture) o;
+                t = (String) o;
+                if (!Picture.isPicture(t.toString())) {
+                    throw new ClassCastException();
+                }
             }
-            return true;
-        } catch (ClassCastException ex) {
-            return false;
+            return t;
+        } catch (Exception ex) {
+            return null;
         }
     }
 
     private final ArrayList<SchemeElement> header = new ArrayList<>();
+    
+    public void add(String name, String type) {
+        SchemeElement c = new SchemeElement(name, type);
+        header.add(c);
+    }
 
     protected void addDouble(String name) {
-        SchemeElement<Double> c = new SchemeElement<>(name, "Double");
+        SchemeElement c = new SchemeElement(name, "Double");
         header.add(c);
     }
 
     protected void addInt(String name) {
-        SchemeElement<Integer> c = new SchemeElement<>(name, "Integer");
+        SchemeElement c = new SchemeElement(name, "Integer");
         header.add(c);
     }
 
     protected void addChar(String name) {
-        SchemeElement<Character> c = new SchemeElement<>(name, "Character");
+        SchemeElement c = new SchemeElement(name, "Character");
         header.add(c);
     }
 
     protected void addString(String name) {
-        SchemeElement<String> c = new SchemeElement<>(name, "String");
+        SchemeElement c = new SchemeElement(name, "String");
         header.add(c);
     }
 
     protected void addPic(String name) {
-        SchemeElement<Picture> c = new SchemeElement<>(name, "Picture");
+        SchemeElement c = new SchemeElement(name, "Picture");
         header.add(c);
     }
 
     protected TableRow createRow() {
         ArrayList<Cell> c = new ArrayList<>();
         for (int i = 0; i < header.size(); i++) {
-            c.add(header.get(i).getCell());
+            c.add(new Cell());
         }
         TableRow r = new TableRow(c, this);
         return r;
+    }
+    
+    protected int getPicIndex() {
+        int k = -1;
+        for (int i = 0; i < header.size(); i++) {
+            if (header.get(i).type.equals("Picture")) {
+                k = i;
+            }
+        }
+        return k;
     }
 
     protected Table createTable(String tname) {
@@ -116,6 +130,22 @@ public class TableScheme {
         } catch (ClassCastException ex) {
             return false;
         }
+    }
+    
+    public ArrayList<String> toStringArray() {
+        ArrayList<String> res = new ArrayList<>();
+        for (SchemeElement se : header) {
+            res.add(se.name + ";" + se.type);
+        }
+        return res;
+    }
+    
+    public ArrayList<String> getColNames() {
+        ArrayList<String> res = new ArrayList<>();
+        for (SchemeElement se : header) {
+            res.add(se.name);
+        }
+        return res;
     }
 
 }

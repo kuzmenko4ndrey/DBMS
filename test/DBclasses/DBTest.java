@@ -80,9 +80,9 @@ public class DBTest {
         data.add(2.3);
         data.add('c');
         instance.addRow(tname, data);
-        String s = "1 2.3 c ";
+        String s = "1;2.3;c;";
         expResult.add(s);
-        s = "2 2.3 c ";
+        s = "2;2.3;c;";
         expResult.add(s);
         instance.deleteRepeatedRows(tname);
         ArrayList<String> result = instance.tableToStringArray(tname);
@@ -119,7 +119,7 @@ public class DBTest {
         data.add(2.3);
         data.add('c');
         instance.addRow(tname2, data);
-        String s = "2 2.3 c ";
+        String s = "2;2.3;c;";
         expResult.add(s);
         ArrayList<String> result = instance.getDiffBetwnTabls(tname1, tname2);
         Object[] e = expResult.toArray();
