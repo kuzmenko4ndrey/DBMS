@@ -285,7 +285,7 @@ public class MainFrame extends javax.swing.JFrame {
         db.dropTable(tableChooser.getSelectedItem());
         tableChooser.remove(tableChooser.getSelectedItem());
         tableChooser.select(0);
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -296,7 +296,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void deleteRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRowButtonActionPerformed
         //db.deleteRow(tableChooser.getSelectedItem(), table.getSelectedRow());
         db.deleteRow(tableChooser.getSelectedItem(), list1.getSelectedIndex());
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -312,7 +312,7 @@ public class MainFrame extends javax.swing.JFrame {
             als.add(c);
         }
         db.addRow(tableChooser.getSelectedItem(), als);
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -321,7 +321,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addRowButtonActionPerformed
 
     private void tableChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tableChooserPropertyChange
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -362,7 +362,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_newDBButtonActionPerformed
 
     private void tableChooserItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tableChooserItemStateChanged
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -371,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tableChooserItemStateChanged
 
     private void tableChooserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableChooserMouseClicked
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
@@ -381,7 +381,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void deleteRepetedRowsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRepetedRowsButtonActionPerformed
         db.deleteRepeatedRows(tableChooser.getSelectedItem());
-        table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
+        //table = new JTable(new MyTableModel(db.getTable(tableChooser.getSelectedItem())));
         list1.removeAll();
         ArrayList<String> k = db.tableToStringArray(tableChooser.getSelectedItem());
         for (int i = 0; i < k.size(); i++) {
