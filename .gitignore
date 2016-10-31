@@ -1,4 +1,5 @@
 *.class
+*.form
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -25,3 +26,5 @@ nbdist/
 /DBMS/.nb-gradle/
 build.xml
 manifest.mf
+/DBMS/src/RMI_IIOP/orb.db/
+/src/RMI_IIOP/orb.db/
