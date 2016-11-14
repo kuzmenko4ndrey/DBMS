@@ -56,7 +56,7 @@ public class MainFrame extends javax.swing.JFrame {
             // invoke the method.
             db = (IDB) PortableRemoteObject.narrow(
                     objref, IDB.class);
-
+            reWriteTables();
         } catch (Exception e) {
             System.err.println("Exception " + e + "Caught");
             e.printStackTrace();
